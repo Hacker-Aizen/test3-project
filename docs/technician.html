@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Technician Dashboard — Bolt Nexus (Demo)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">
+        <div class="logo">BN</div>
+        <div>
+          <div class="title">Bolt Nexus</div>
+          <div class="tag">Technician Dashboard (Demo)</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="dashboard">
+      <div class="container">
+        <h2>Assigned Jobs (Demo)</h2>
+        <p class="lead">This is a demo technician view. In production, protect this with Memberstack role-based access or Airtable Interface filtered by technician.</p>
+        <div class="tiles" id="tech-tiles"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Demo data — in production fetch from Airtable with technician filter
+    const demo = [
+      {id:'recA1', user:'Ravi Kumar', phone:'+91 98xxxx', appliance:'AC LG 1.5T', scheduled:'2025-11-10 10:30', status:'Confirmed'},
+      {id:'recA2', user:'Suman Silva', phone:'+91 98yyyy', appliance:'Fridge Whirlpool', scheduled:'2025-11-11 14:00', status:'Scheduled'}
+    ];
+    const container = document.getElementById('tech-tiles');
+    demo.forEach(d=>{
+      const el = document.createElement('div'); el.className='tile';
+      el.innerHTML = `<div class="hdr"><div><strong>${d.appliance}</strong><div class="meta">${d.user} • ${d.phone}</div></div><div><button class='btn' data-id='${d.id}'>Mark Done</button></div></div><div class='meta'>${d.scheduled} • ${d.status}</div>`;
+      container.appendChild(el);
+    });
+
+    container.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-id]');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      // Demo: mark done
+      btn.innerText = 'Done'; btn.disabled = true; btn.style.opacity = 0.6;
+      alert('Marked job ' + id + ' as Done (demo). In production this updates Airtable Booking record and triggers email to user.');
+    });
+  </script>
+</body>
+</html>

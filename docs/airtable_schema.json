@@ -1,0 +1,47 @@
+{
+  "baseName": "Bolt Nexus MVP",
+  "tables": [
+    {
+      "name": "Users",
+      "fields": [
+        {"name":"UserID","type":"autonumber"},
+        {"name":"Name","type":"singleLineText"},
+        {"name":"Phone","type":"phone"},
+        {"name":"Email","type":"email"},
+        {"name":"City","type":"singleLineText"},
+        {"name":"MemberstackID","type":"singleLineText"}
+      ]
+    },
+    {
+      "name":"Appliances",
+      "fields":[
+        {"name":"ApplianceID","type":"autonumber"},
+        {"name":"User","type":"link","options":{"linkedTableName":"Users"}},
+        {"name":"Type","type":"singleLineText"},
+        {"name":"BrandModel","type":"singleLineText"},
+        {"name":"YearOfPurchase","type":"number"},
+        {"name":"UsageHoursPerDay","type":"number"},
+        {"name":"MonthsSinceLastService","type":"number"},
+        {"name":"HealthScore","type":"number"},
+        {"name":"EstimatedLossPerMonth","type":"currency"},
+        {"name":"Status","type":"singleLineText"},
+        {"name":"Photo","type":"attachment"}
+      ]
+    },
+    {
+      "name":"Bookings",
+      "fields":[
+        {"name":"BookingID","type":"autonumber"},
+        {"name":"User","type":"link","options":{"linkedTableName":"Users"}},
+        {"name":"Appliance","type":"link","options":{"linkedTableName":"Appliances"}},
+        {"name":"ServiceType","type":"singleLineText"},
+        {"name":"ScheduledAt","type":"dateTime"},
+        {"name":"Technician","type":"singleLineText"},
+        {"name":"PaymentStatus","type":"singleLineText"},
+        {"name":"BookingStatus","type":"singleLineText"},
+        {"name":"RazorpayPaymentID","type":"singleLineText"},
+        {"name":"AfterServiceNotes","type":"longText"}
+      ]
+    }
+  ]
+}
